@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="admin_base1::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	<section>
+	<div class="row col-md-10 offset-md-1">
+	<h2 class="text-center">Crimes</h2>
+	<table class="table table-bordered table-striped mt-5">
+		<tr>
+			<th>Crime Id</th>
+			<th>Crime</th>
+			<th>Description</th>
+			<th>Criminal</th>
+			<th>Action</th>
+		</tr>
+		<tr th:each="crime: ${crimes}"> 
+			<td th:text="${crime.crimeId}"></td>
+			<td th:text="${crime.crimeName}"></td>
+			<td th:text="${crime.description}"></td>
+			<td th:text="${crime.criminal}"></td>
+			<td><a href="#" th:href="@{'/admin/crimes/remove/'+${crime.crimeId}}"><i class="fas fa-trash"> </i></a></td>
+		</tr>
+	</table>
+	<div th:if="${totalPages>1}">
+		<div class="row col-sm-12">
+			<div class="col-sm-2">
+				Total Crimes: [[${totalItems}]]
+			</div>
+			<div class="col-sm-1">
+				<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+					<a th:if="${currentPage!=i}" th:href="@{'/admin/crimes/'+${i}}">[[${i}]]</a>
+					<span th:unless="${currentPage!=i}">[[${i}]]</span> &nbsp;
+				</span>
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage<totalPages}" th:href="@{'/admin/crimes/'+${currentPage+1}}">Next</a>
+				<span th:unless="${currentPage < totalPages}">Next</span> &nbsp;
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage<totalPages}" th:href="@{'/admin/crimes/'+${totalPages}}">Last</a>
+				<span th:unless="${currentPage < totalPages}">Last</span>
+			</div>
+		</div>
+	</div>
+	</div>
+	</section>
+</body>
+</html>

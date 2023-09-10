@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+	<h1>Reset Psw</h1>
+	<div>
+		<form action="resetPswProcessor" method="post">
+			<div>
+				<label>New Password</label>
+				<input type="text" name="newPsw" id="newPsw" required="required"/>
+			</div>
+			<div>
+				<label>Confirm Password</label>
+				<input type="text" name="cnfPsw" id="cnfPsw" required="required"/>
+			</div>
+			<div>
+				<input type="submit" value="submit">
+			</div>
+		</form>
+	</div>
+	</section>
+</body>
+</html>

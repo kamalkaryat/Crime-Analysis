@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="admin_base1::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	<section>
+	<div class="row col-md-10 offset-md-1">
+	<h2 class="text-center">Blocked Users</h2>
+		<table class="table table-bordered table-striped mt-5">
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>DOB</th>
+			<th>Gender</th>
+			<th>Phone</th>
+			<th>Occupation</th>
+			<th>Username</th>
+			<th>Area</th>
+			<th>Action</th>
+		</tr>
+		<tr th:each="user: ${users}"> 
+			<td th:text="${user.userId}"></td>
+			<td th:text="${user.name.firstName}+' '+${user.name.MiddleName}+' '+${user.name.LastName}"></td>
+			<td th:text="${user.dob}"></td>
+			<td th:text="${user.gender}"></td>
+			<td th:text="${user.phone}"></td>
+			<td th:text="${user.occupation}"></td>
+			<td th:text="${user.login.username}"></td>
+			<td th:text="${user.area.areaName}+' '+${user.area.district}+' '+${user.area.state}+' '+${user.area.pincode}" ></td>
+			<td><a href="#" th:href="@{'/admin/users/user/unblock/'+${user.userId}}"><i class="fas fa-trash"> </i></a></td>
+		</tr>
+	</table>
+	
+	<div th:if="${totalPages>1}">
+		<div class="row col-sm-12">
+			<div class="col-sm-2">
+				Total Feedbacks: [[${totalItems}]]
+			</div>
+			<div class="col-sm-1">
+				<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+				
+					<a th:if="${currentPage!=i}" th:href="@{'/admin/feedbacks/blocked/'+${i}}">[[${i}]]</a>
+					<span th:unless="${currentPage!=i}">[[${i}]]</span> &nbsp;
+				</span>
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage<totalPages}" th:href="@{'/admin/feedbacks/blocked/'+${currentPage+1}}">Next</a>
+				<span th:unless="${currentPage < totalPages}">Next</span> &nbsp;
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage<totalPages}" th:href="@{'/admin/feedbacks/blocked/'+${totalPage}}">Last</a>
+				<span th:unless="${currentPage < totalPages}">Last</span>
+			</div>
+		</div>
+	</div>
+	</div>
+	</section>
+</body>
+</html>

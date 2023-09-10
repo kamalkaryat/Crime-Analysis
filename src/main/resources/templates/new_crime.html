@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="admin_base1::layout(~{::section})">
+<head>
+<title></title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					
+					<div class="container text-center mt-5">
+						<h3>Add New Crime</h3>
+					</div>    
+					<form action="#" th:action="@{/admin/crimes/add}" method="post" th:object="${crime}">
+			  	  	
+			  			<div class="form-group">
+			    			<label for="crimeName">Crime*</label>
+			    			<input type="text" class="form-control" id="crimeName" name="crimeName" placeholder="Crime" 
+			    				th:value="${crime.crimeName}" th:classappend="${#fields.hasErrors('crimeName')}? 'is-invalid' : '' ">
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('crimeName')}" th:text="${e}"> </div>
+			  			</div>
+			  	
+			  			<div class="form-group">
+			    			<label for="criminal">Criminal</label>
+			    			<input type="text" class="form-control" id="criminal" name="criminal" placeholder="Criminal" 
+			    				th:value="${crime.criminal}" th:classappend="${#fields.hasErrors('criminal')}? 'is-invalid' : '' ">
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('criminal')}" th:text="${e}"> </div>
+			  			</div>
+			  			
+			  			<div class="form-group">
+			    			<label for="description">Description</label>
+			    			<textarea cols="50" rows="4" maxlength="50" class="form-control" id="description" name="description" placeholder="Description" 
+			    				th:value="${crime.description}" th:classappend="${#fields.hasErrors('description')}? 'is-invalid' : '' ">
+			    			</textarea>
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('description')}" th:text="${e}"> </div>
+			  			</div>
+			  			
+			  			<div class="container text-center">
+			  				<button type="submit" class="btn btn-primary">Add</button>
+			  			</div>
+					</form>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

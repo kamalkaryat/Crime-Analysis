@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="user_base1::layout(~{::section})">
+<head>
+<title></title>
+</head>
+<body>
+	<section>
+	
+	<h1>Give Feedback</h1>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 offset-3">
+				
+				<form th:action="@{/user/submitFeedback}" th:method="post" th:object="${feed}">
+					
+					<div class="form-group">
+		    			<label class="col-sm-4 col-form-label">User Id</label>
+		    			<input type="text" class="form-control" id="userId" name="user.userId" readonly="readonly"
+		    				th:value="${feed.user.userId}" th:classappend="${#fields.hasErrors('user.userId')}? 'is-invalid' : '' ">
+		    			<div class="invalid-feedback" th:each="e : ${#fields.errors('user.userId')}" th:text="${e}"> </div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+		    			<label class="col-sm-4 col-form-label">Date-Time[yyyy-mm-dd hh:mm:ss]*</label>
+		    			<input type="datetime" class="form-control" id="feedDateTime" name="feedDateTime" required="required"
+		    				th:value="${feed.feedDateTime}" th:classappend="${#fields.hasErrors('feedDateTime')}? 'is-invalid' : '' ">
+		    			<div class="invalid-feedback" th:each="e : ${#fields.errors('feedDateTime')}" th:text="${e}"> </div>
+			  		</div>
+			  		
+			  		<div class="autocomplete form-group">
+		    			<label class="col-sm-4 col-form-label">Crime*</label>
+		    			<div>
+		    				<input type="text" class="form-control" id="crimeName" name="crime.crimeName" required="required" placeholder="Select Crime"
+		    					th:value="${feed.crime.crimeName}" th:classappend="${#fields.hasErrors('crime.crimeName')}? 'is-invalid' : '' ">
+		    			</div>
+		    			<div class="invalid-feedback" th:each="e : ${#fields.errors('crime.crimeName')}" th:text="${e}"> </div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+		    			<label class="col-sm-4 col-form-label">State/UT</label>
+		    			<input type="text" class="form-control" id="state" name="area.state" readonly="readonly"
+		    				th:value="${feed.area.state}" th:classappend="${#fields.hasErrors('area.state')}? 'is-invalid' : '' ">
+		    			<div class="invalid-feedback" th:each="e : ${#fields.errors('area.state')}" th:text="${e}"> </div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+		    			<label class="col-sm-4 col-form-label">District/City</label>
+		    			<input type="text" class="form-control" id="district" name="area.district" readonly="readonly"
+		    				th:value="${feed.area.district}" th:classappend="${#fields.hasErrors('area.district')}? 'is-invalid' : '' ">
+		    			<div class="invalid-feedback" th:each="e : ${#fields.errors('area.district')}" th:text="${e}"> </div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+		    			<label class="col-sm-4 col-form-label">Pincode</label>
+		    			<input type="number" class="form-control" id="pincode" name="area.pincode" readonly="readonly"
+		    				th:value="${feed.area.pincode}" th:classappend="${#fields.hasErrors('area.pincode')}? 'is-invalid' : '' ">
+		    			<div class="invalid-feedback" th:each="e : ${#fields.errors('area.pincode')}" th:text="${e}"> </div>
+			  		</div>
+			  		
+			  		<div class="autocomplete form-group">
+		    			<label class="col-sm-4 col-form-label">Area</label>
+		    			<div>
+		    				<input type="text" class="form-control" id="areaName" name="area.areaName" 
+		    					th:value="${feed.area.areaName}" th:classappend="${#fields.hasErrors('area.areaName')}? 'is-invalid' : '' ">
+		    			</div>
+		    			<div class="invalid-feedback" th:each="e : ${#fields.errors('area.areaName')}" th:text="${e}"> </div>
+			  		</div>		
+			  		
+			  		<div class="text-center">
+			  				<button type="reset" class="btn btn-primary">Clear</button>
+			  				<button type="submit" class="btn btn-primary">Register</button>
+			  		</div>  		
+				</form>
+			
+			</div>
+		</div>
+	</div>
+	
+	<script th:src="@{../../js/populate_crimes.js}"></script>
+	<script th:src="@{../../js/find_area.js}"></script>
+	</section>
+</body>
+</html>

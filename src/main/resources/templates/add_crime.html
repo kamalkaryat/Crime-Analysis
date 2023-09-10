@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="user_base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div>
+						<span class="container text-center mt-5">Add Crime</span>
+					</div>
+					<div>
+						<label>Criminal</label>
+						<input type="text" name="criminal" id="criminal">
+					</div>
+					<div>
+						<label>Crime Name</label>
+						<input type="text" name="crimeName" id="crimeName">
+					</div>
+					<div>
+						<label>Description</label>
+						<input type="text" name="description" id="description">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>

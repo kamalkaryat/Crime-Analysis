@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="user_base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	<section>
+		<div class="text-center">
+			<h1>User Home</h1>
+		</div>
+		<div class="container">
+			<form th:action="@{/user/home}" th:method="get">
+  			<div class="row gx-4 offset-md-3 mt-5">
+  				
+    			<div class="col-3">
+    				<div class="p-1 border bg-gray">
+    					<input type="date" id="from" name="from" th:value="${default.from}"/>
+    					<h3 class="text-center">From</h3>
+    				</div>
+    			</div>
+    			<div class="col-3">
+      				<div class="p-1 border bg-gray">
+						<input type="date" id="to" name="to" th:value="${default.to}"/>
+						<h3 class="text-center">To</h3>
+					</div>
+    			</div>
+    			<div class="col-3">
+      				<div class="btn">
+						<input type="submit" value="Find"/>
+					</div>
+    			</div>
+    			
+  			</div>
+  			</form>
+		</div>
+		<div class="row col-md-8 offset-md-2">
+			<table class="table table-bordered table-striped mt-4">
+				<tr>
+					<th>Crime</th>
+					<th>Total Feedback</th>
+					<th>Valid Feedback</th>
+					<th>Rate[%]</th>
+					<th>Margin[%]</th>					
+				</tr>
+				<tr th:each="areaReport: ${reports}">
+					<td th:text="${areaReport.crime}"></td>
+					<td th:text="${areaReport.totFeed}"></td>
+					<td th:text="${areaReport.validFeed}"></td>
+					<td th:text="${areaReport.rate}"></td>
+					<td  th:style="${areaReport.margin} > 0 ? 'color:red' : 'color:green'" 
+					th:text="${areaReport.margin} >0 ? '+' : '-'">
+						<p th:text="${areaReport.margin}"></p> </td>
+				</tr>
+			</table>	
+		</div>
+		
+		<div class="container">
+  			<div class="row gx-6 offset-md-3 mt-5">
+    			<div class="col-3">
+    				<div class="p-1 border bg-gray">
+    					<h4>Enter Crime</h4>
+    				</div>
+    			</div>
+    			<div class="autocomplete col-4">
+      				<div class="p-1 border bg-gray">
+						<input type="text" class="form-control" id="crimeName" name="crime"placeholder="e.g. Robbery"
+   							th:value="${default.crime}">
+					</div>
+    			</div>
+  			</div>
+		</div>
+		
+		<div class="container ">
+  			<div class="row gx-6 offset-md-1 mt-5">
+    			<div class="col-5">
+    				<div class="p-1 border bg-danger text-light">
+    					<!-- Most Increased Crime -->
+						<h1 class="text-center">Most Increased Crime</h1>
+						<div>
+							<div>
+								<h3>Crime</h3>
+								<p th:text="${increased.crime}"></p>
+							</div>
+							<div>
+								<h3>Total Feedback</h3>
+								<p th:text="${increased.totFeed}"></p>
+							</div>
+							<div>
+								<h3>Valid Feedback</h3>
+								<p th:text="${increased.validFeed}"></p>
+							</div>
+							<div>	
+								<h3>Rate</h3>
+								<p th:text="${increased.rate}"></p>
+							</div>
+							<div>
+								<h3>Margin</h3>
+								<p th:style="${increased.margin} > 0 ? 'color:red' : 'color:green'" 
+									th:text="${increased.margin} >0 ? '+' : '-'">
+									<span th:text="${increased.margin}"></span>	
+								</p>
+							</div>
+						</div>
+    				</div>
+    			</div>
+    			<div class="col-5">
+      				<div class="p-1 border bg-success text-light mb-20">
+						
+					<!-- Most Decreased Crime -->
+					<h1 class="text-center">Most Decreased Crime</h1>
+						<div>
+							<div>
+								<h3>Crime</h3>
+								<p th:text="${decreased.crime}"></p>
+							</div>
+							<div>
+								<h3>Total Feedback</h3>
+								<p th:text="${decreased.totFeed}"></p>
+							</div>
+							<div>
+								<h3>Valid Feedback</h3>
+								<p th:text="${decreased.validFeed}"></p>
+							</div>
+							<div>	
+								<h3>Rate</h3>	<p th:text="${decreased.rate}"></p>
+								
+							</div>
+							<div>
+								<h3>Margin</h3>
+								<p th:style="${decreased.margin} > 0 ? 'color:red' : 'color:green'" 
+									th:text="${decreased.margin} >0 ? '+' : '-'">
+									<span th:text="${decreased.margin}"></span>	
+								</p>
+							</div>
+						</div>
+					</div>
+    			</div>
+  			</div>
+		</div>
+		<script th:src="@{../../js/populate_crimes.js}"></script>
+		<footer style="width:20%;"></footer>
+	</section>
+</body>
+</html>

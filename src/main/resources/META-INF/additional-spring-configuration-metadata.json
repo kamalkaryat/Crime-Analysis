@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "SPRING_DATASOURCE_USERNAME",
+    "type": "java.lang.String",
+    "description": "Database Username"
+  },
+  {
+    "name": "SPRING_DATASOURCE_PASSWORD",
+    "type": "java.lang.String",
+    "description": "Database Password"
+  },
+  {
+    "name": "SPRING_DATASOURCE_URL",
+    "type": "java.lang.String",
+    "description": "Database URL"
+  },
+  {
+    "name": "SPRING_DATASOURCE_NAME",
+    "type": "java.lang.String",
+    "description": "Database Name"
+  }
+]}

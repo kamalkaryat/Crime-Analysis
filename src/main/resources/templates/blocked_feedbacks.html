@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="admin_base1::layout(~{::section})">
+<head>
+<title></title>
+</head>
+<body>
+	<section>
+	<div class="row col-md-9 offset-md-1">
+	<h2>Blocked Feedbacks</h2>
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th>Id</th>
+			<th>Date-Time[yyyy:mm:dd hh:mm]</th>
+			<th>Crime</th>
+			<th>Area</th>
+			<th>User Id</th>
+			<th>Action</th>
+		</tr>
+		<tr th:each="feedback: ${feedbacks}"> 
+			<td th:text="${feedback.feedId}"></td>
+			<td th:text="${feedback.feedDateTime}"></td>
+			<td th:text="${feedback.crime.crimeName}"></td>
+			<td th:text="${feedback.user.area.areaName}"></td>
+			<td th:text="${feedback.user.userId}"></td>
+			<td><a href="#" th:href="@{'/admin/feedbacks/feedback/unblock/'+${feedback.feedId}}"> <i class="fas fa-trash" id="deleteFeed"></i> </a></td>
+		</tr>
+	</table>
+	<div th:if="${totalPages>1}">
+		<div class="row col-sm-10">
+			<div class="col-sm-4">
+				Total Blocked Feedbacks: [[${totalItems}]]
+			</div>
+			<div class="col-sm-3">
+				<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+					<a th:if="${i<10 && currentPage!=i}" th:href="@{'/admin/feedbacks/blocked/'+${i}}">[[${i}]]</a>
+					<span th:unless="${currentPage!=i}">[[${i}]]</span> &nbsp;
+				</span>
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage!=1}" th:href="@{'/admin/feedbacks/'+${currentPage-1}}">Prev</a>
+				<span th:unless="${currentPage != 1}">Prev</span>
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage<totalPages}" th:href="@{'/admin/feedbacks/blocked/'+${currentPage+1}}">Next</a>
+				<span th:unless="${currentPage < totalPages}">Next</span> &nbsp;
+			</div>
+			<div class="col-sm-1">
+				<a th:if="${currentPage<totalPages}" th:href="@{'/admin/feedbacks/blocked/'+${totalPages}}">Last</a>
+				<span th:unless="${currentPage < totalPages}">Last</span>
+			</div>
+		</div>
+	</div>
+	</div>
+	</section>
+</body>
+</html>

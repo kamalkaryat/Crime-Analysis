@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="user_base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	<section>
+	
+	<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					
+					<div class="container text-center mt-5">
+						<h2>Profile</h2>
+					</div>    
+					<form th:action="@{/user/profile/update}" th:method="post" th:object="${user}">
+			  		
+			  			<!-- div class="alert alert-danger" role="alert">
+			    			<h4>${error_msg}</h4>
+			    			<form:errors path="std.*"/>
+						</div-->
+					  	
+			  			<div class="form-group">
+			    			<label class="col-sm-2 col-form-label">User Id</label>
+			    			<input type="email" class="form-control" id="userId" name="userId" readonly="readonly" 
+			    				th:value="${user.userId}" th:classappend="${#fields.hasErrors('userId')}? 'is-invalid' : '' ">
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('userId')}" th:text="${e}"> </div>
+			  			</div>
+			  		
+			  			<div class="form-group">
+			    			<label class="col-sm-2 col-form-label">First Name*</label>
+			    			<input type="text" class="form-control" id="firstName" name="name.firstName" required="required" placeholder="Enter First Name" 
+			    				th:value="${user.name.firstName}" th:classappend="${#fields.hasErrors('name.firstName')}? 'is-invalid' : '' ">
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('name.firstName')}" th:text="${e}"> </div>
+			  			</div>
+			  		
+			  			<div class="form-group">
+			    			<label class="col-sm-2 col-form-label">Middle Name</label>
+			    			<input type="text" class="form-control" id="middleName" name="name.middleName" placeholder="Enter Middle Name" 
+			    				th:value="${user.name.middleName}" th:classappend="${#fields.hasErrors('name.middleName')}? 'is-invalid' : '' ">
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('name.middleName')}" th:text="${e}"> </div>
+			  			</div>
+			  			
+			  			<div class="form-group">
+			    			<label class="col-sm-2 col-form-label">Last Name</label>
+			    			<input type="text" class="form-control" id="lastName" name="name.lastName" placeholder="Enter Last Name" 
+			    				th:value="${user.name.lastName}" th:classappend="${#fields.hasErrors('name.lastName')}? 'is-invalid' : '' ">
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('name.lastName')}" th:text="${e}"> </div>
+			  			</div>
+			  			
+			  			<div class="form-group">
+			    			<label class="col-sm-2 col-form-label">DOB*</label>
+			    			<input type="date" class="form-control" id="dob" name="dob" required="required" placeholder="Enter Dob" 
+			    				th:value="${user.dob}" th:classappend="${#fields.hasErrors('dob')}? 'is-invalid' : '' ">
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('dob')}" th:text="${e}"> </div>
+			  			</div>
+			  			
+			  			<div class="form-group">
+			    			<label class="col-sm-2 col-form-label">Gender</label>
+			    			<input type="radio" name="gender" value="Male">Male
+			    			<input type="radio" name="gender" value="Female">Female
+			    			<input type="radio" name="gender" value="Other">Other
+			  				<div class="invalid-feedback" th:each="e : ${#fields.errors('gender')}" th:text="${e}"> </div>
+			  			</div>
+			  		
+			  			<div class="form-group">
+			    			<label class="col-sm-2 col-form-label">Phone</label>
+			    			<input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Phone No"
+			    				th:value="${user.phone}" th:classappend="${#fields.hasErrors('phone')}? 'is-invalid' : '' ">
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('phone')}" th:text="${e}"> </div>
+			  			</div>
+			  			
+			  			<div class="autocomplete form-group">
+			    			<label class="col-sm-2 col-form-label">Occupation</label>
+			    			<div>
+			    				<input type="text" class="form-control" id="occupation" name="occupation" placeholder="Enter Occupation"
+			    					th:value="${user.occupation}" th:classappend="${#fields.hasErrors('occupation')}? 'is-invalid' : '' ">
+			    			</div>
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('occupation')}" th:text="${e}"> </div>
+			  			</div>
+			  			
+			  			<div class="form-group">
+			    			<label class="col-sm-2 col-form-label">Username</label>
+			    			<input type="text" class="form-control" id="username" name="username" readonly="readonly"
+			    				th:value="${user.username}" th:classappend="${#fields.hasErrors('username')}? 'is-invalid' : '' ">
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('username')}" th:text="${e}"> </div>
+			  			</div>
+			  			
+			  			<!-- Area -->
+			  			<div class="autocomplete form-group">
+			    			<label class="col-sm-2 col-form-label">State/UT*</label>
+			    			<div>
+			    				<input type="text" class="form-control" id="state" name="area.state" required="required" placeholder="Enter State"
+			    					th:value="${user.area.state}" th:classappend="${#fields.hasErrors('area.state')}? 'is-invalid' : '' ">
+			    			</div>
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('area.state')}" th:text="${e}"> </div>
+			  			</div>
+			  			<div class="autocomplete form-group">
+			    			<label class="col-sm-2 col-form-label">District*</label>
+			    			<div>
+			    				<input type="text" class="form-control" id="district" name="area.district" required="required" placeholder="Enter District"
+			    					th:value="${user.area.district}" th:classappend="${#fields.hasErrors('area.district')}? 'is-invalid' : '' ">
+			    			</div>
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('area.district')}" th:text="${e}"> </div>
+			  			</div>
+			  			<div class="autocomplete form-group">
+			    			<label class="col-sm-2 col-form-label">Pincode*</label>
+			    			<div>
+			    				<input type="text" class="form-control" id="pincode" name="area.pincode" required="required" placeholder="Enter Pincode"
+			    					th:value="${user.area.pincode}" th:classappend="${#fields.hasErrors('area.pincode')}? 'is-invalid' : '' ">
+			    			</div>
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('area.pincode')}" th:text="${e}"> </div>
+			  			</div>
+			  			<div class="autocomplete form-group">
+			    			<label class="col-sm-2 col-form-label">Area Name*</label>
+			    			<div>
+			    				<input type="text" class="form-control" id="areaName" name="area.areaName" required="required" placeholder="Enter Area Name"
+			    					th:value="${user.area.areaName}" th:classappend="${#fields.hasErrors('area.areaName')}? 'is-invalid' : '' ">
+			    			</div>
+			    			<div class="invalid-feedback" th:each="e : ${#fields.errors('area.areaName')}" th:text="${e}"> </div>
+			  			</div>
+			  			
+			  			<div class="container text-center">
+			  				<button type="submit" class="btn btn-primary">Update</button>
+			  			</div>
+					</form>
+					
+				</div>
+			</div>
+		</div>
+	<script th:src="@{../js/populate_occup.js}"></script>
+  	<script th:src="@{../js/find_area.js}"></script>
+	</section>
+</body>
+</html>
